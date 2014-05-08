@@ -27,4 +27,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 TARGET_PREBUILT_KERNEL := device/lenovo/stuttgart/kernel
 
+TARGET_NO_BOOTLOADER := true
+
+# recovery
+BOARD_CUSTOM_BOOTIMG_MK := device/lenovo/stuttgart/shbootimg.mk
 BOARD_HAS_NO_SELECT_BUTTON := true
