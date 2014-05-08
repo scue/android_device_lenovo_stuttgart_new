@@ -24,11 +24,20 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 419430400
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2621440000
 BOARD_FLASH_BLOCK_SIZE := 4096
 TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_USES_MMCUTILS := true
+BOARD_HAS_LARGE_FILESYSTEM := true
 
 TARGET_PREBUILT_KERNEL := device/lenovo/stuttgart/kernel
 
 TARGET_NO_BOOTLOADER := true
 
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
+
 # recovery
 BOARD_CUSTOM_BOOTIMG_MK := device/lenovo/stuttgart/shbootimg.mk
+TARGET_RECOVERY_INITRC := device/lenovo/stuttgart/recovery/recovery.rc
+BOARD_CUSTOM_GRAPHICS := ../../../device/lenovo/stuttgart/recovery/griphics.c
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
+BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
