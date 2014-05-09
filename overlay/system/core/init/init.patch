@@ -1,0 +1,83 @@
+diff --git a/init/init.c b/init/init.c
+index 61636ff..8f0c5b1 100755
+--- a/init/init.c
++++ b/init/init.c
+@@ -860,6 +860,46 @@ int audit_callback(void *data, security_class_t cls, char *buf, size_t len)
+ 
+ #endif
+ 
++#ifndef STUTTGART_CMDLINE_FILE
++#define STUTTGART_CMDLINE_FILE "/proc/cmdline"
++#endif
++#ifndef CP_UPDATE_MOD
++#define CP_UPDATE_MOD "cp_update=1"
++#endif
++#ifndef TESTMODE_MOD
++#define TESTMODE_MOD "testmode=1"
++#endif
++#ifndef USB_CABLE
++#define USB_CABLE "usb_cable"
++#endif
++#ifndef AC_CHARGER
++#define AC_CHARGER "ac_charger"
++#endif
++
++static int stuttgart_mod(void)
++{
++    FILE *fp;
++    long cmdline_len=0;
++    char cmdline_data[512]="";
++    char *p=NULL;
++    if ((fp = fopen(STUTTGART_CMDLINE_FILE, "r"))==NULL)
++    {
++        return 0;                               /* Normally */
++    }
++    fread(cmdline_data, 1, 512, fp);
++    fclose(fp);
++    p=strstr(cmdline_data, TESTMODE_MOD);
++    if (p != NULL)
++    {
++        return 2;                               /* TESTMODE */
++    }
++    p=strstr(cmdline_data, CP_UPDATE_MOD);
++    if (p != NULL)
++    {
++        return 1;                               /* CP UPDATE */
++    }
++    return 0;
++}
+ static int charging_mode_booting(void)
+ {
+ #ifndef BOARD_CHARGING_MODE_BOOTING_LPM
+@@ -965,7 +1005,7 @@ int main(int argc, char **argv)
+     restorecon("/dev/socket");
+ #endif
+ 
+-    is_charger = !strcmp(bootmode, "charger");
++    is_charger = false;
+ 
+     INFO("property init\n");
+     if (!is_charger)
+@@ -973,10 +1013,18 @@ int main(int argc, char **argv)
+ 
+     INFO("reading config file\n");
+ 
+-    if (!charging_mode_booting())
+-       init_parse_config_file("/init.rc");
+-    else
+-       init_parse_config_file("/lpm.rc");
++    int stuttgart_mod_ret = stuttgart_mod();
++    if (stuttgart_mod_ret == 2)                 /* testmode */
++    {
++        init_parse_config_file("/init.testmode.rc");
++    }
++    else if (stuttgart_mod_ret == 1)            /* cp update */
++    {
++        init_parse_config_file("/init.cp_update.rc");
++    }
++    else {                                      /* boot normally */
++        init_parse_config_file("/init.rc");
++    }
+ 
+     /* Check for an emmc initialisation file and read if present */
+     if (emmc_boot && access("/init.emmc.rc", R_OK) == 0) {
