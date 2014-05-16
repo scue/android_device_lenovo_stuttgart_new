@@ -112,13 +112,6 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     ro.debuggable=1
 
-# System: firmware
-PRODUCT_COPY_FILES += \
-	device/lenovo/stuttgart/firmware/fw_bcmdhd_apsta.bin:system/etc/firmware/fw_bcmdhd_apsta.bin \
-	device/lenovo/stuttgart/firmware/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
-	device/lenovo/stuttgart/firmware/fw_bcmdhd_p2p.bin:system/etc/firmware/fw_bcmdhd_p2p.bin \
-	device/lenovo/stuttgart/firmware/sdio-g-mfgtest.bin:system/etc/firmware/sdio-g-mfgtest.bin
-
 # System: rril
 PRODUCT_COPY_FILES += \
 	device/lenovo/stuttgart/rril/repository.txt:system/etc/rril/repository.txt \
