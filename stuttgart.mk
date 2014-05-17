@@ -29,10 +29,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-# Gps
-PRODUCT_COPY_FILES += \
-    device/lenovo/stuttgart/configs/gpsconfig.xml:system/etc/gpsconfig.xml
-
 # This device is xhdpi.  However the platform doesn't
 # currently contain all of the bitmaps at xhdpi density so
 # we do this little trick to fall back to the hdpi version
@@ -129,6 +125,10 @@ PRODUCT_COPY_FILES += \
 # System: Wifi
 PRODUCT_COPY_FILES += \
     device/lenovo/stuttgart/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
+# System: Gps
+PRODUCT_COPY_FILES += \
+    device/lenovo/stuttgart/configs/gpsconfig.xml:system/etc/gpsconfig.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
