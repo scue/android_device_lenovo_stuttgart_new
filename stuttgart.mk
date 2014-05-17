@@ -119,25 +119,8 @@ PRODUCT_COPY_FILES += \
 
 # System: Audio
 PRODUCT_COPY_FILES += \
-	device/lenovo/stuttgart/configs/asound.conf:system/etc/asound.conf \
-	device/lenovo/stuttgart/configs/audio_policy.conf:system/etc/audio_policy.conf \
-	device/lenovo/stuttgart/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
-	device/lenovo/stuttgart/alsa/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf \
-	device/lenovo/stuttgart/alsa/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
-	device/lenovo/stuttgart/alsa/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
-	device/lenovo/stuttgart/alsa/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
-	device/lenovo/stuttgart/alsa/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
-	device/lenovo/stuttgart/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
-	device/lenovo/stuttgart/alsa/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
-	device/lenovo/stuttgart/alsa/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
-	device/lenovo/stuttgart/alsa/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
-	device/lenovo/stuttgart/alsa/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
-	device/lenovo/stuttgart/alsa/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
-	device/lenovo/stuttgart/alsa/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
-	device/lenovo/stuttgart/alsa/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
-	device/lenovo/stuttgart/alsa/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
-	device/lenovo/stuttgart/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
-	device/lenovo/stuttgart/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf
+    $(LOCAL_BASEDIR)/configs/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
+    $(LOCAL_BASEDIR)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 # System: vold
 PRODUCT_COPY_FILES += \
@@ -167,6 +150,7 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.primary.smdk4x12 \
 	audio.usb.default \
+	libaudiohw_legacy \
 	Camera
 
 PRODUCT_PACKAGES += \
